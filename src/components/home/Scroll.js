@@ -4,7 +4,7 @@ import {HiOutlineArrowSmDown} from "react-icons/hi";
 const Scroll = () => {
   return (
     <div className="home__scroll">
-        <a href="#about" className="home__scroll-button button--flex">
+        <a href="#about" className="home__scroll-button button--flex" rel="noreferrer" target="blank">
             <svg
                 width="32px"
                 height="32px"
