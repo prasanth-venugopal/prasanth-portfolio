@@ -1,15 +1,14 @@
 .services__container {
-    /* grid-template-columns: repeat(3, 270px); */
-    display: flex;
+    grid-template-columns: repeat(1, 300px);
+    column-gap: 3rem;
     justify-content: center;
-    column-gap: 1.8rem;
 }
 
 .services__content {
-    position: relative;
-    border: 1px sold rgba(0, 0, 0, 1);
     background-color: var(--container-color);
-    padding: 6rem 0 2rem 2.5rem;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 2rem 4rem;
+    border-radius: 1.25rem;
 }
 
 .services__icon {
