@@ -1,4 +1,7 @@
 import './App.css';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+import { useEffect } from 'react';
 import Header from './components/header/Header';
 import Home from './components/home/Home';
 import About from './components/about/About';
@@ -11,6 +14,14 @@ import ScrollUp from './components/scrollup/ScrollUp';
 import Portfolio from './components/projects/Portfolio';
 
 const App = () => {
+  useEffect(() => {
+  AOS.init({
+    duration: 1000,    
+    once: true,         
+    offset: 100,       
+  });
+}, []);
+
   return (
     <>
       <Header/>

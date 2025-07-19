@@ -26,7 +26,7 @@ const Projects = () => {
     };
 
     return (
-        <div>
+        <div data-aos="fade-right" data-aos-delay="300">
             <div className="project__filters">
                 {projectsNav.map((item,index) => {
                     return (

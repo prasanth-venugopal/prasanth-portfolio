@@ -1,135 +1,162 @@
 import React, { useState } from "react";
 import "./qualification.css";
 import { HiOutlineAcademicCap, HiOutlineBriefcase, HiOutlineCalendar } from "react-icons/hi";
+import { motion, AnimatePresence } from "framer-motion";
 
 const Qualification = () => {
-    const [toggleState, setToggleState] = useState(1)
+    const [activeTab, setActiveTab] = useState('education');
 
-    const toggleTab = (index) => {
-        setToggleState(index);
+    const educationData = [
+        {
+            title: "10th Grade",
+            subtitle: "Govt.Hr.Sec. School, Kullanayakkanpalayam, Namakkal(Dt).",
+            period: "2015-2016",
+            result: "Mark - 84.4%"
+        },
+        {
+            title: "12th Grade",
+            subtitle: "Govt. Boys Hr.Sec. School, Komarapalayam, Namakkal(Dt).",
+            period: "2017-2018",
+            result: "Mark - 52.67%"
+        },
+        {
+            title: "B.Sc. in Computer Science",
+            subtitle: "KSR College of Arts and Science(Autonomous), Tiruchengode, Namakkal(Dt).",
+            period: "2018-2021",
+            result: "CGPA - 7.674"
+        },
+        {
+            title: "MBA in Human Resource Management & Marketing",
+            subtitle: "SSM College of Engineering, Komarapalayam, Namakkal(Dt).",
+            period: "2021-2023",
+            result: "CGPA - 7"
+        }
+    ];
+
+    const experienceData = [
+        {
+            title: "Summer Internship",
+            subtitle: "Sri Cheran Synthetics India Private Limited, Pallipalayam, Namakkal(Dt).",
+            period: "Jan 2022-March 2022",
+            result: ""
+        },
+        {
+            title: "Full Stack Web Developer Intern",
+            subtitle: "Brainvalley Software Private Limited, Chennai.",
+            period: "Nov 2023-Apr 2024",
+            result: ""
+        }
+    ];
+
+    const itemVariants = {
+        hidden: { opacity: 0, y: 20 },
+        visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
     };
-  
+
+    const containerVariants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.1
+            }
+        }
+    };
+
     return (
-    <section className="qualification section">
-        <h2 className="section__title">Qualification</h2>
-        <span className="section__subtitle">My Journey</span>
+        <div data-aos="zoom-in-up" data-aos-delay="300">
+        <section className="qualification section" id="qualification" >
+            <h2 className="section__title">Qualifications</h2>
+            <span className="section__subtitle">My Professional Journey</span>
 
-        <div className="qualification__container container">
-            <div className="qualification__tabs">
-                <div className={toggleState === 1 ? "qualification__button button--flex qualification__active" 
-                    : "qualification__button button--flex"} onClick={() => toggleTab(1)}>
-                    <HiOutlineAcademicCap className="qualification__icon" />
-                    Education
+            <div className="qualification__container">
+                <div className="qualification__tabs">
+                    <motion.button
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        className={`qualification__tab ${activeTab === 'education' ? 'active' : ''}`}
+                        onClick={() => setActiveTab('education')}
+                    >
+                        <HiOutlineAcademicCap className="qualification__icon" />
+                        Education
+                    </motion.button>
+                    
+                    <motion.button
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        className={`qualification__tab ${activeTab === 'experience' ? 'active' : ''}`}
+                        onClick={() => setActiveTab('experience')}
+                    >
+                        <HiOutlineBriefcase className="qualification__icon" />
+                        Experience
+                    </motion.button>
                 </div>
-                <div className={toggleState === 2 ? "qualification__button button--flex qualification__active" 
-                    : "qualification__button button--flex"} onClick={() => toggleTab(2)}>
-                    <HiOutlineBriefcase className="qualification__icon" />
-                    Experience
+
+                <div className="qualification__content">
+                    <AnimatePresence mode="wait">
+                        {activeTab === 'education' && (
+                            <motion.div
+                                key="education"
+                                initial="hidden"
+                                animate="visible"
+                                exit="hidden"
+                                variants={containerVariants}
+                                className="qualification__items"
+                            >
+                                {educationData.map((item, index) => (
+                                    <motion.div
+                                        key={index}
+                                        variants={itemVariants}
+                                        className="qualification__item"
+                                    >
+                                        <div className="qualification__header">
+                                            <h3>{item.title}</h3>
+                                            <div className="qualification__period">
+                                                <HiOutlineCalendar />
+                                                <span>{item.period}</span>
+                                            </div>
+                                        </div>
+                                        <p className="qualification__subtitle">{item.subtitle}</p>
+                                        {item.result && <div className="qualification__result">{item.result}</div>}
+                                    </motion.div>
+                                ))}
+                            </motion.div>
+                        )}
+
+                        {activeTab === 'experience' && (
+                            <motion.div
+                                key="experience"
+                                initial="hidden"
+                                animate="visible"
+                                exit="hidden"
+                                variants={containerVariants}
+                                className="qualification__items"
+                            >
+                                {experienceData.map((item, index) => (
+                                    <motion.div
+                                        key={index}
+                                        variants={itemVariants}
+                                        className="qualification__item"
+                                    >
+                                        <div className="qualification__header">
+                                            <h3>{item.title}</h3>
+                                            <div className="qualification__period">
+                                                <HiOutlineCalendar />
+                                                <span>{item.period}</span>
+                                            </div>
+                                        </div>
+                                        <p className="qualification__subtitle">{item.subtitle}</p>
+                                        {item.result && <div className="qualification__result">{item.result}</div>}
+                                    </motion.div>
+                                ))}
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
                 </div>
             </div>
-
-            <div className="qualification__sections">
-                <div className={toggleState === 1 ? "qualification__content qualification__content-active"
-                    : "qualification__content"}>
-                    <div className="qualification__data">
-                        <div>
-                            <h3 className="qualification__title">10th Grade</h3>
-                            <span className="qualification__subtitle">Govt.Hr.Sec. School, Kullanayakkanpalayam, Namakkal(Dt).</span>
-                            <div className="qualification__calendar">
-                                <HiOutlineCalendar className="qualification__calendar-icon" />
-                                2015-2016<br/> 
-                                Mark - 84.4%
-                            </div>
-                        </div>
-                        <div>
-                            <span className="qualification__rounder"></span>
-                            <span className="qualification__line"></span>
-                        </div>
-                    </div>
-                    <div className="qualification__data">
-                        <div></div>
-                        <div>
-                            <span className="qualification__rounder"></span>
-                            <span className="qualification__line"></span>
-                        </div>
-                        <div>
-                            <h3 className="qualification__title">12th Grade</h3>
-                            <span className="qualification__subtitle">Govt. Boys Hr.Sec. School, Komarapalayam, Namakkal(Dt).</span>
-                            <div className="qualification__calendar">
-                                <HiOutlineCalendar className="qualification__calendar-icon" />
-                                2017-2018<br/>
-                                Mark - 52.67%
-                            </div>
-                        </div>
-                    </div>
-                    <div className="qualification__data">
-                        <div>
-                            <h3 className="qualification__title">B.Sc. in Computer Science</h3>
-                            <span className="qualification__subtitle">KSR College of Arts and Science(Autonomous), Tiruchengode, Namakkal(Dt).</span>
-                            <div className="qualification__calendar">
-                                <HiOutlineCalendar className="qualification__calendar-icon" />
-                                2018-2021<br/>
-                                CGPA - 7.674
-                            </div>
-                        </div>
-                        <div>
-                            <span className="qualification__rounder"></span>
-                            <span className="qualification__line"></span>
-                        </div>
-                    </div>
-                    <div className="qualification__data">
-                        <div></div>
-                        <div>
-                            <span className="qualification__rounder"></span>
-                            <span className="qualification__line"></span>
-                        </div>
-                        <div>
-                            <h3 className="qualification__title">MBA in Human Resource Management & Marketing</h3>
-                            <span className="qualification__subtitle">SSM College of Engineering, Komarapalayam, Namakkal(Dt).</span>
-                            <div className="qualification__calendar">
-                                <HiOutlineCalendar className="qualification__calendar-icon" />
-                                2021-2023<br/>
-                                CGPA - 7
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div className={toggleState === 2 ? "qualification__content qualification__content-active"
-                    : "qualification__content"}>
-                    <div className="qualification__data">
-                        <div>
-                            <h3 className="qualification__title">Summer Internship</h3>
-                            <span className="qualification__subtitle">Sri Cheran Synthetics India Private Limited, Pallipalayam, Namakkal(Dt).</span>
-                            <div className="qualification__calendar">
-                                <HiOutlineCalendar className="qualification__calendar-icon" />
-                                Jan 2022-March 2022
-                            </div>
-                        </div>
-                        <div>
-                            <span className="qualification__rounder"></span>
-                            <span className="qualification__line"></span>
-                        </div>
-                    </div>
-                    <div className="qualification__data">
-                        <div></div>
-                        <div>
-                            <span className="qualification__rounder"></span>
-                            <span className="qualification__line"></span>
-                        </div>
-                        <div>
-                            <h3 className="qualification__title">Full Stack Web Developer Intern</h3>
-                            <span className="qualification__subtitle">Brainvalley Software Private Limited, Chennai.</span>
-                            <div className="qualification__calendar">
-                                <HiOutlineCalendar className="qualification__calendar-icon" />
-                                Nov 2023-Apr 2024
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        </section>
         </div>
-    </section> 
-  );
-}
+    );
+};
 
 export default Qualification;

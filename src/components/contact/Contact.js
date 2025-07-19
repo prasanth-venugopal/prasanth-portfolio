@@ -14,11 +14,12 @@ const Contact = () => {
     };
   
     return (
+        <div data-aos="zoom-in-up">
     <section className="contact section" id="contact">
         <h2 className="section__title">Let's Connect</h2>
         <span className="section__subtitle">Contact Me</span>
 
-        <div className="contact__container container grid">
+        <div className="contact__container container grid" data-aos="fade-right" data-aos-delay="300">
             <div className="contact__content">
                 <h3 className="contact__title">Talk to me</h3>
                 
@@ -37,7 +38,7 @@ const Contact = () => {
                 </div>
             </div>
 
-            <div className="contact__content">
+            <div className="contact__content" data-aos="fade-left" data-aos-delay="600">
                 <h3 className="contact__title">Comments on work</h3>
 
                 <form ref={form} onSubmit={sendEmail} className="contact__form">
@@ -80,6 +81,7 @@ const Contact = () => {
             </div>
         </div>
     </section>
+    </div>
   );
 }
 

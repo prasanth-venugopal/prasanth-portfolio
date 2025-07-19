@@ -1,12 +1,12 @@
 import React from 'react';
 import "./about.css";
-import AboutImg from "../../assets/prasanth.jpeg";
+import AboutImg from "../../assets/prasanth.png";
 import CV from "../../assets/prasanth_cv.pdf";
 import Info from "./Info";
 
 const About = () => {
   return (
-    <section className="about section" id="about">
+    <section className="about section" id="about" data-aos="zoom-in-up" data-aos-delay="200">
         <h2 className="section__title">About Me</h2>
         <span className="section__subtitle">A short introduction</span>
         <div className="about__container container grid">
